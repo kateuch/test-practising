@@ -1,9 +1,11 @@
 import { useState } from "react";
+import Outputs from "./Outputs";
 
 const Greetings = () => {
+
   const [changedText, setChangedText] = useState(false);
   const onButtonClicked = () => {
-    setChangedText(true);
+    setChangedText(!changedText);
   };
   return (
     <>
@@ -11,9 +13,12 @@ const Greetings = () => {
         {!changedText ? "Show greetings" : "Hide greetings"}
       </button>
       {changedText && (
-        <div>
-          <h2>Hello World!</h2>
+
+        <div className='greetings'>
+
+            <h2>Hello World!</h2>
           <p>Good to see you!</p>
+
         </div>
       )}
     </>

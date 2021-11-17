@@ -16,24 +16,35 @@ describe("Greeting component", () => {
     expect(buttonElement).toBeInTheDocument();
   });
 
-  test("button click - show/hide the greetings", () => {
+  test("button click - show the greetings", () => {
     //Arrange
     render(<Greetings />);
     //Act
-    const buttonElement = screen.getByRole("button");
+    const buttonElement = screen.queryByText("Show greetings");
     userEvent.click(buttonElement);
     // Assert
-    if (buttonElement.innerText === "Show greetings") {
+    if (buttonElement) {
+
       const buttonText = screen.queryByText("Hide greetings", { exact: false });
       const element = screen.queryByText("Hello World!"); //'!' missed, but with exact: false it is ok
       expect(element).toBeInTheDocument();
       expect(buttonText).toBeInTheDocument();
     }
-    if (buttonElement.innerText === "Hide greetings") {
-      const buttonText = screen.queryByText("Show greetings", { exact: false });
-      const element = screen.queryByText("Hello World!"); //'!' missed, but with exact: false it is ok
-      expect(element).not.toBeInTheDocument();
-      expect(buttonText).toBeInTheDocument();
-    }
-  });
+    });
+
+  // test("button click - hide the greetings", () => {
+  //   //Arrange
+  //   render(<Greetings />);
+  //   //Act
+  //   const buttonElement = screen.queryByRole("button");
+  //   userEvent.click(buttonElement);
+  //   // Assert
+
+
+  //     const buttonText = screen.queryByText("Show greetings", { exact: false });
+  //     const element = screen.queryByText("Hello World!", {exact: true}); //'!' missed, but with exact: false it is ok
+  //     expect(element).not.toBeInTheDocument();
+  //     // expect(buttonText).toBeInTheDocument();
+
+  // })
 });
